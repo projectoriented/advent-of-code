@@ -18,8 +18,8 @@ def is_increased(first: int, second: int) -> int:
     else:
         return 0
 
-starting=0
+sum_of_increased=0
 overlapping_chunks = list(mit.windowed(data, n=2, step=1))
 for c in overlapping_chunks:
-    starting+=is_increased(*c)
-print(starting)
+    sum_of_increased+=is_increased(*c)
+print(sum_of_increased)
