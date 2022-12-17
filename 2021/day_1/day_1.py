@@ -12,7 +12,7 @@ fp = os.path.join(os.path.dirname(os.path.realpath(__file__)), "day_1-data_input
 with open (fp) as file_object:
     data = [int(line.rstrip()) for line in file_object]
 
-def is_increased(first: int, second: int):
+def is_increased(first: int, second: int) -> int:
     if second > first:
         return 1
     else:
