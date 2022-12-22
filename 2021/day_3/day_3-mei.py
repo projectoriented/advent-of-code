@@ -40,3 +40,5 @@ gamma = get_decimal(gamma)
 epsilon = get_decimal(epsilon)
 
 print(gamma * epsilon)
+
+## Part 2.
