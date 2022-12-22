@@ -9,7 +9,7 @@ import more_itertools as mit
 # Resolve input file path
 fp = os.path.join(os.path.dirname(os.path.realpath(__file__)), "day_1-data_input-mei.txt")
 
-# Save each line into a variable
+# Read all the lines in the file and remove trailing white space
 with open (fp) as file_object:
     data = [int(line.rstrip()) for line in file_object]
 
