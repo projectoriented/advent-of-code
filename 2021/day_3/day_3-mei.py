@@ -2,8 +2,9 @@
 
 from collections import Counter
 import os
+import functools
 
-# https://adventofcode.com/2021/day/2
+# https://adventofcode.com/2021/day/3
 
 
 ## Part 1.
@@ -16,29 +17,56 @@ with open (fp) as file_object:
 
 
 def get_decimal(binary_string: str) -> int:
+    """
+    Convert a binary string to decimal.
+    Args:
+        binary_string (str): binary string
+
+    Returns:
+        int: decimal of binary string
+    """
     return int(binary_string, base=2)
 
 
-def get_common(lst: list, freq='high') -> str:
+def get_common(lst: list, freq: str) -> str:
+    """
+    Get most/least common bit.
+
+    Args:
+        lst (list): A list of bit strings.
+        freq (str): Desired frequency, e.g. high or low
+
+    Returns:
+        str: The most/least common bit string in the list.
+    """
     c = Counter(lst)
-    if freq == 'high':
-        return max(lst, key=c.get)
-    elif freq == 'low':
-        return min(lst, key=c.get)
+    equal_freq = functools.reduce(lambda x, y: x == y, c.values())
+    
+    if equal_freq == True:
+        if freq == 'high':
+            return '1'
+        elif freq == 'low':
+            return '0'
     else:
-        return f'{freq} is not an argument'
+        if freq == 'high':
+            return max(lst, key=c.get)
+        elif freq == 'low':
+            return min(lst, key=c.get)
 
-zipped_list = list(zip(*data))
+# Group the positional bits in each byte.
+positional_bits_lst = list(zip(*data))
 
-epsilon = ''
-gamma = ''
-for pairs in zipped_list:
-    gamma+=get_common(lst=pairs,freq='high')
-    epsilon+=get_common(lst=pairs, freq='low')
+def get_consumption_rate(lst: list) -> int:
+    epsilon = ''
+    gamma = ''
+    for bits in lst:
+        gamma+=get_common(lst=bits,freq='high')
+        epsilon+=get_common(lst=bits, freq='low')
 
-gamma = get_decimal(gamma)
-epsilon = get_decimal(epsilon)
+    gamma = get_decimal(gamma)
+    epsilon = get_decimal(epsilon)
 
-print(gamma * epsilon)
+    return gamma * epsilon
 
 ## Part 2.
+        
